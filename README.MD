@@ -1,65 +1,33 @@
-Pedido:
+# Order Management System
 
-{
-  "id": 1,
-  "dataPedido": "2024-08-16T14:30:00",
-  "status": "PENDENTE",
-  "valorTotal": 150.75,
-  "numeroMesa": 12
-}
+A comprehensive Order Management System for a restaurant. This application handles the creation, listing, editing, and deletion of orders and their respective items. The system is designed to be modular and efficient, utilizing Spring Boot for the backend API and RabbitMQ for handling real-time order notifications.
 
+## Features
 
-Item:
+- **CRUD Operations**: Manage products, orders, and items with ease.
+- **Real-time Notifications**: Orders are processed with RabbitMQ for seamless notifications.
+- **Spring Boot Backend**: A robust and scalable API built with Spring Boot.
+- **In-Memory Database**: Leverage H2 for quick testing and prototyping.
 
-{
-  "id": 1,
-  "nome": "Pizza Margherita",
-  "descricao": "Pizza com molho de tomate, queijo e manjericão.",
-  "preco": 50.25
-}
+## Technologies Used
 
+- **Spring Boot**: For creating a powerful and scalable REST API.
+- **RabbitMQ**: To handle and process real-time notifications of orders.
+- **H2 Database**: Used for development and testing purposes.
+- **Lombok**: For reducing boilerplate code in Java classes.
+- **Maven**: For project management and build automation.
 
-ItemPedido:
+## Getting Started
 
-{
-  "id": 1,
-  "pedido": {
-    "id": 1
-  },
-  "item": {
-    "id": 1
-  },
-  "quantidade": 3,
-  "precoUnitario": 50.25
-}
+### Prerequisites
 
+- JDK 17 or higher
+- Maven 3.8.1 or higher
+- RabbitMQ server installed and running
 
-exemplo de requisição para criar pedido:
-{
-    "dataPedido": "2024-08-16T14:30:00",
-    "status": "PENDENTE",
-    "valorTotal": 150.75,
-    "numeroMesa": 12,
-    "itens": [
-        {
-            "pedido": {
-                "id": null
-            },
-            "item": {
-                "id": 1
-            },
-            "quantidade": 3,
-            "precoUnitario": 50.25
-        },
-        {
-            "pedido": {
-                "id": null
-            },
-            "item": {
-                "id": 2
-            },
-            "quantidade": 2,
-            "precoUnitario": 50.25
-        }
-    ]
-}
+### Running the Project
+
+1. **Clone the repository**:
+   ```bash
+   git clone git@github.com:yourusername/order-management-system.git
+   cd order-management-system
