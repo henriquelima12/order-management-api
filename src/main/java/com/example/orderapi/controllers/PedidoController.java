@@ -1,6 +1,6 @@
 package com.example.orderapi.controllers;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.orderapi.amqp.QueueSender;
 import com.example.orderapi.entities.Pedido;
 import com.example.orderapi.services.PedidoService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 @RequestMapping("/pedidos")
@@ -25,6 +28,11 @@ public class PedidoController {
 
     @Autowired
     private PedidoService pedidoService;
+
+    @Autowired
+    private QueueSender queueSender;
+
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @GetMapping
     public List<Pedido> getAllPedidos() {
@@ -36,11 +44,13 @@ public class PedidoController {
         Optional<Pedido> pedido = pedidoService.getPedidoById(id);
         return pedido.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
-    
+
     @PostMapping
-    public ResponseEntity<Pedido> createPedido(@RequestBody Pedido pedido) {
-        pedido.setDataPedido(LocalDateTime.now());
+    public ResponseEntity<Pedido> createPedido(@RequestBody Pedido pedido) throws JsonProcessingException {
+        pedido.setDataPedido(new Date());
         Pedido createdPedido = pedidoService.savePedido(pedido);
+        String createdPedidoJson = objectMapper.writeValueAsString(createdPedido);
+        queueSender.send(createdPedidoJson);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPedido);
     }
 
@@ -62,5 +72,5 @@ public class PedidoController {
         pedidoService.deletePedido(id);
         return ResponseEntity.noContent().build();
     }
-    
+
 }
