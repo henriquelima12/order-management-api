@@ -1,7 +1,7 @@
 package com.example.orderapi.entities;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Set;
 
 import com.example.orderapi.enums.StatusPedido;
@@ -33,7 +33,7 @@ public class Pedido {
     private Long id;
 
     @Column(name = "data_pedido", nullable = false)
-    private LocalDateTime dataPedido;
+    private Date dataPedido;
 
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
