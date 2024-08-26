@@ -30,8 +30,8 @@ A comprehensive Order Management System for a restaurant. This application handl
 
 1. **Clone the repository**:
    ```bash
-   git clone git@github.com:yourusername/order-management-system.git
-   cd order-management-system
+   git clone git@github.com:yourusername/order-management-api.git
+   cd order-management-api
 
 2. **Start RabbitMQ using Docker Compose**:
    ```bash
