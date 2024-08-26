@@ -1,4 +1,4 @@
-# Order Management System
+# Order Management Api
 
 A comprehensive Order Management System for a restaurant. This application handles the creation, listing, editing, and deletion of orders and their respective items. The system is designed to be modular and efficient, utilizing Spring Boot for the backend API and RabbitMQ for handling real-time order notifications.
 
@@ -48,5 +48,5 @@ A comprehensive Order Management System for a restaurant. This application handl
    mvn clean install
 
 5. **Run the project**:
-   ´´´bash
+   ```bash
    mvn spring-boot:run
